@@ -1,19 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
+import firebase from "firebase";
 import "semantic-ui-css/semantic.min.css";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+import config from "./firebase_config.json";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import rootReducer from "./rootReducer";
+import { getAuthState } from "./actions/auth";
+
+firebase.initializeApp(config);
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
+
+store.dispatch(getAuthState);
 
 ReactDOM.render(
   <BrowserRouter>

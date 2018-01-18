@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Message } from "semantic-ui-react";
 import Validator from "validator";
 import PropTypes from "prop-types";
 import InlineError from "../messages/InlineError";
@@ -23,8 +23,14 @@ class LoginForm extends React.Component {
     const errors = this.validate(this.state.data);
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
+      this.setState({ loading: true });
       // submit form to backend
-      this.props.submit(this.state.data);
+      // and catch firebase error
+      this.props
+        .submit(this.state.data)
+        .catch(err =>
+          this.setState({ errors: { global: err.message }, loading: false })
+        );
     }
   };
 
@@ -36,9 +42,15 @@ class LoginForm extends React.Component {
   };
 
   render() {
-    const { data, errors } = this.state;
+    const { data, errors, loading } = this.state;
     return (
-      <Form onSubmit={this.onSubmit}>
+      <Form onSubmit={this.onSubmit} loading={loading}>
+        {errors.global && (
+          <Message negative>
+            <Message.Header>Something went wrong</Message.Header>
+            <p>{errors.global}</p>
+          </Message>
+        )}
         <Form.Field error={!!errors.email}>
           <label htmlFor="email">Email</label>
           <input
