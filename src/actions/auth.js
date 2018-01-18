@@ -1,5 +1,5 @@
 import firebase from "firebase";
-import { USER_LOGGED_IN, AUTH_STATE_CHANGED } from "./types";
+import { USER_LOGGED_IN, AUTH_STATE_CHANGED, USER_LOGGED_OUT } from "./types";
 import api from "../api";
 
 const userLoggedIn = user => ({
@@ -20,5 +20,8 @@ export const getAuthState = dispatch =>
     if (user) {
       return dispatch(authStateChanged(user));
     }
-    return dispatch(authStateChanged(null));
+    return dispatch(authStateChanged({}));
   });
+
+export const logout = () => dispatch =>
+  api.user.logout().then(dispatch({ type: USER_LOGGED_OUT }));
