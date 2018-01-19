@@ -75,7 +75,7 @@ class LoginForm extends React.Component {
           />
           {errors.password && <InlineError text={errors.password} />}
         </Form.Field>
-        <Button primary>Login</Button>
+        <Button primary>Sign Up</Button>
       </Form>
     );
   }
