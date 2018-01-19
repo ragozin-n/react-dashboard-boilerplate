@@ -9,4 +9,4 @@
 * [Redux](https://github.com/reactjs/react-redux) state container with [devtools](https://github.com/zalmoxisus/redux-devtools-extension)
 * [Redux Thunk](https://github.com/gaearon/redux-thunk) for async actions
 * [Axios](https://github.com/axios/axios) for all kind of HTTP requiests (you might not need firebase)
-* [Firebase](https://firebase.google.com) for authorization and data storing
+* [Firebase](https://firebase.google.com) for token-based authorization and data storing

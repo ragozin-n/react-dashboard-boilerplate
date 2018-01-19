@@ -6,6 +6,7 @@ export default {
       firebase
         .auth()
         .signInWithEmailAndPassword(credentials.email, credentials.password),
-    logout: () => firebase.auth().signOut()
+    logout: () => firebase.auth().signOut(),
+    onAuthStateChange: callback => firebase.auth().onAuthStateChanged(callback)
   }
 };

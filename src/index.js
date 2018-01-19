@@ -22,12 +22,23 @@ const store = createStore(
 
 store.dispatch(getAuthState);
 
-ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </BrowserRouter>,
-  document.getElementById("root")
-);
-registerServiceWorker();
+// FIREBASE FIX
+function waitForFirebaseInit() {
+  return new Promise(resolve => {
+    store.subscribe(() => {
+      if (store.getState().user !== null) resolve();
+    });
+  });
+}
+
+waitForFirebaseInit().then(() => {
+  ReactDOM.render(
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>,
+    document.getElementById("root")
+  );
+  registerServiceWorker();
+});
