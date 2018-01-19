@@ -10,3 +10,17 @@
 * [Redux Thunk](https://github.com/gaearon/redux-thunk) for async actions
 * [Axios](https://github.com/axios/axios) for all kind of HTTP requiests (you might not need firebase)
 * [Firebase](https://firebase.google.com) for token-based authorization and data storing
+
+### Usage:
+```bash
+git clone https://github.com/ragozin-n/react-dashboard-boilerplate.git
+cd react-dashboard-boilerplate && yarn install
+```
+Place firebase_config.json to root directory and start develop with
+```bash
+yarn start
+```
+or build production code with
+```bash
+yarn build
+```
