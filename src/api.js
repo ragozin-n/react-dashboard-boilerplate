@@ -7,6 +7,10 @@ export default {
         .auth()
         .signInWithEmailAndPassword(credentials.email, credentials.password),
     logout: () => firebase.auth().signOut(),
-    onAuthStateChange: callback => firebase.auth().onAuthStateChanged(callback)
+    onAuthStateChange: callback => firebase.auth().onAuthStateChanged(callback),
+    signup: credentials =>
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(credentials.email, credentials.password)
   }
 };
