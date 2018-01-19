@@ -12,5 +12,10 @@ export default {
       firebase
         .auth()
         .createUserWithEmailAndPassword(credentials.email, credentials.password)
+        .then(user => {
+          if (user && user.emailVerified === false) {
+            user.sendEmailVerification();
+          }
+        })
   }
 };
